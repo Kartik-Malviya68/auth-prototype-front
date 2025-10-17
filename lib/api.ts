@@ -1,14 +1,12 @@
-// lib/api.ts
 export const API_BASE = process.env.NEXT_PUBLIC_API_BASE!;
-
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
-    credentials: "include",                   // send/receive backend cookie
+    credentials: "include", // sends API cookie in browser
     headers: { "content-type": "application/json", ...(init?.headers || {}) },
     ...init,
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data?.error || "Request failed");
+  if (!res.ok) throw new Error((data as any)?.error || "Request failed");
   return data as T;
 }
 
