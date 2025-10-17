@@ -19,6 +19,7 @@ export async function getServerSession(): Promise<ServerSession> {
     method: "GET",
     headers: { cookie: `${COOKIE_NAME}=${token}` },
     cache: "no-store",
+    credentials:"include"
   });
 
   if (!r.ok) return { authenticated: false };

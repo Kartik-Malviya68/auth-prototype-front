@@ -12,6 +12,7 @@ export async function logoutAction() {
         method: "POST",
         headers: token ? { cookie: `${COOKIE_NAME}=${token}` } : {},
         cache: "no-store",
+        credentials:"include"
     });
     // Nothing else to do: the backend clears the cookie on its domain.
 }
